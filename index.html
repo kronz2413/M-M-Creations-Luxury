@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M&M Creation Luxury — Fornitura & Decorations</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =============================================
+     CSS VARIABLES & RESET
+  ============================================= */
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #8A6B28;
+    --cream: #F5EDD8;
+    --dark: #0D0B08;
+    --dark2: #1A1610;
+    --dark3: #2A2218;
+    --wood: #5C3D1E;
+    --wood-light: #8B5E3C;
+    --white: #FAF6EE;
+    --text-muted: #9A8A6A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* =============================================
+     CUSTOM CURSOR
+  ============================================= */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.6;
+  }
+  .cursor.hover { width: 20px; height: 20px; }
+  .cursor-ring.hover { width: 56px; height: 56px; opacity: 0.3; }
+
+  /* =============================================
+     GRAIN OVERLAY
+  ============================================= */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* =============================================
+     NAVIGATION
+  ============================================= */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 500;
+    padding: 1.5rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(13,11,8,0.95), transparent);
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(13,11,8,0.97); backdrop-filter: blur(12px); }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--cream); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 100%;
+    height: 1px; background: var(--gold);
+    transition: right 0.4s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { right: 0; }
+
+  .nav-cta {
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 0.5rem 1.5rem;
+    letter-spacing: 0.15em !important;
+    transition: background 0.3s, color 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--dark) !important; }
+  .nav-cta::after { display: none; }
+
+  /* =============================================
+     HERO
+  ============================================= */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(90,58,28,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark) 100%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 900px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-badge::before, .hero-badge::after { content: ''; width: 20px; height: 1px; background: var(--gold); }
+  .hero-crown {
+    font-size: 2rem; display: block; margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 700; line-height: 0.95;
+    margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title .gold { color: var(--gold); }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic; color: var(--text-muted);
+    letter-spacing: 0.05em; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0; animation: fadeUp 0.8s 1s forwards;
+    color: var(--text-muted); font-size: 0.65rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollAnim 2s infinite;
+  }
+  @keyframes scrollAnim {
+    0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+    50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    51%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+  }
+  .wood-shape {
+    position: absolute; border-radius: 2px; opacity: 0.06;
+    animation: floatShape linear infinite;
+  }
+  @keyframes floatShape {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.06; }
+    90%  { opacity: 0.06; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* =============================================
+     STATS BAR
+  ============================================= */
+  .stats-bar {
+    background: var(--dark2);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 2rem 3rem;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  }
+  .stat-item {
+    text-align: center; padding: 1rem;
+    border-right: 1px solid rgba(201,168,76,0.1);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem; color: var(--gold); display: block;
+  }
+  .stat-label {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-muted); margin-top: 0.3rem;
+  }
+
+  /* =============================================
+     SECTION BASE
+  ============================================= */
+  section { padding: 7rem 3rem; position: relative; }
+  .section-tag {
+    font-size: 0.7rem; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+  }
+  .section-tag::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 600; line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .section-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic;
+    color: var(--text-muted); max-width: 550px; line-height: 1.7;
+  }
+
+  /* =============================================
+     BUTTONS
+  ============================================= */
+  .btn-primary {
+    background: var(--gold); color: var(--dark);
+    padding: 1rem 2.5rem;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    border: none; cursor: none;
+    text-decoration: none; display: inline-block;
+    transition: box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold-light);
+    transform: translateX(-100%) skewX(-15deg);
+    transition: transform 0.4s;
+  }
+  .btn-primary:hover::before { transform: translateX(100%) skewX(-15deg); }
+  .btn-primary:hover { box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-ghost {
+    border: 1px solid rgba(201,168,76,0.4); color: var(--gold);
+    padding: 1rem 2.5rem;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    text-decoration: none; display: inline-block;
+    transition: background 0.3s, border-color 0.3s; cursor: none;
+  }
+  .btn-ghost:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+
+  /* =============================================
+     ABOUT
+  ============================================= */
+  .about { background: var(--dark2); }
+  .about-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .about-visual { position: relative; }
+  .about-frame {
+    width: 100%; aspect-ratio: 3/4;
+    position: relative; overflow: hidden;
+  }
+  /* Professional image for about section */
+  .about-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85) contrast(1.05);
+    transition: transform 0.6s ease;
+  }
+  .about-frame:hover img { transform: scale(1.04); }
+  /* Gold overlay tint */
+  .about-frame::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(13,11,8,0.1) 0%,
+      rgba(92,61,30,0.15) 60%,
+      rgba(13,11,8,0.5) 100%
+    );
+    pointer-events: none;
+  }
+  .about-frame-border {
+    position: absolute; top: -15px; right: -15px; bottom: 15px; left: 15px;
+    border: 1px solid rgba(201,168,76,0.3); pointer-events: none;
+    z-index: 2;
+  }
+  .about-accent {
+    position: absolute; bottom: -20px; left: -20px;
+    background: var(--gold); padding: 1.5rem 2rem;
+    font-family: 'Cinzel', serif; font-size: 0.8rem;
+    color: var(--dark); letter-spacing: 0.1em;
+    z-index: 3;
+  }
+
+  /* =============================================
+     SERVICES
+  ============================================= */
+  .services { background: var(--dark); }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-header { margin-bottom: 4rem; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px; background: rgba(201,168,76,0.1);
+  }
+  .service-card {
+    background: var(--dark2);
+    position: relative; overflow: hidden;
+    transition: background 0.4s, transform 0.3s, box-shadow 0.4s; cursor: none;
+    display: flex; flex-direction: column;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 100%;
+    height: 2px; background: var(--gold); transition: right 0.5s; z-index: 2;
+  }
+  .service-card:hover { background: var(--dark3); }
+  .service-card:hover::before { right: 0; }
+
+  /* Image header for service cards */
+  .service-img-wrap {
+    width: 100%; aspect-ratio: 16/9;
+    overflow: hidden; position: relative;
+    flex-shrink: 0;
+  }
+  .service-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    filter: brightness(0.65) contrast(1.1) saturate(0.7);
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+  }
+  .service-card:hover .service-img-wrap img {
+    transform: scale(1.07);
+    filter: brightness(0.5) contrast(1.15) saturate(0.6);
+  }
+  /* Gold-dark gradient overlay on image */
+  .service-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(13,11,8,0.1) 0%,
+      rgba(13,11,8,0.55) 100%
+    );
+    pointer-events: none;
+    transition: background 0.4s;
+  }
+  .service-card:hover .service-img-wrap::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(13,11,8,0.2) 0%,
+      rgba(92,61,30,0.5) 100%
+    );
+  }
+
+  /* Text body below the image */
+  .service-body { padding: 2rem 2.5rem 2.5rem; position: relative; flex: 1; }
+
+  .service-name {
+    font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600;
+    margin-bottom: 0.8rem; color: var(--cream); letter-spacing: 0.05em;
+  }
+  .service-desc { font-size: 0.88rem; line-height: 1.8; color: var(--text-muted); }
+  .service-num {
+    position: absolute; top: 1.5rem; right: 2rem;
+    font-family: 'Cinzel', serif; font-size: 3.5rem; font-weight: 700;
+    color: rgba(201,168,76,0.06); line-height: 1; transition: color 0.4s;
+    pointer-events: none;
+  }
+  .service-card:hover .service-num { color: rgba(201,168,76,0.14); }
+
+  /* =============================================
+     CATALOG — MAIN GRID
+  ============================================= */
+  .catalog { background: var(--dark2); }
+  .catalog-inner { max-width: 1200px; margin: 0 auto; }
+  .catalog-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+  .catalog-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  }
+
+  .catalog-item {
+    position: relative; cursor: none;
+    overflow: hidden; background: var(--dark3);
+    border: 1px solid rgba(201,168,76,0.08);
+    transition: border-color 0.4s, transform 0.3s, box-shadow 0.4s;
+  }
+  .catalog-item:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.15);
+  }
+
+  .catalog-item .open-hint {
+    position: absolute; inset: 0;
+    background: rgba(13,11,8,0);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3; transition: background 0.35s;
+    pointer-events: none;
+  }
+  .catalog-item:hover .open-hint { background: rgba(13,11,8,0.45); }
+  .open-hint-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.5rem 1.2rem;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .catalog-item:hover .open-hint-label { opacity: 1; transform: translateY(0); }
+
+  /* Updated catalog thumb — now uses real images */
+  .catalog-thumb {
+    aspect-ratio: 1;
+    position: relative; overflow: hidden;
+    background: var(--dark3);
+  }
+  .catalog-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    filter: brightness(0.75) contrast(1.1) saturate(0.85);
+  }
+  .catalog-item:hover .catalog-thumb img { transform: scale(1.08); }
+  /* Gold gradient overlay on catalog thumb */
+  .catalog-thumb::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(13,11,8,0.85) 0%,
+      rgba(13,11,8,0.2) 50%,
+      rgba(92,61,30,0.1) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.4s;
+  }
+  .catalog-item:hover .catalog-thumb::after {
+    background: linear-gradient(
+      to top,
+      rgba(13,11,8,0.7) 0%,
+      rgba(13,11,8,0.1) 50%,
+      rgba(201,168,76,0.1) 100%
+    );
+  }
+  /* Fallback for catalog thumb when no img */
+  .catalog-thumb-fallback {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--dark3), var(--dark2));
+    position: relative; z-index: 1;
+  }
+
+  .catalog-info { padding: 1.2rem 1.5rem 1.5rem; }
+  .catalog-num {
+    font-family: 'Cinzel', serif; font-size: 0.65rem;
+    color: var(--gold); letter-spacing: 0.2em; margin-bottom: 0.4rem;
+  }
+  .catalog-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; color: var(--cream);
+  }
+  .catalog-tag {
+    font-size: 0.7rem; color: var(--text-muted);
+    margin-top: 0.3rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .catalog-count-badge {
+    position: absolute; top: 0.8rem; right: 0.8rem; z-index: 4;
+    background: rgba(13,11,8,0.8);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem; letter-spacing: 0.15em;
+    padding: 0.25rem 0.6rem;
+    pointer-events: none;
+  }
+
+  /* =============================================
+     CATALOG — DETAIL PANEL
+  ============================================= */
+  #catalog-detail {
+    position: fixed; inset: 0;
+    background: var(--dark);
+    z-index: 800;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: transform;
+  }
+  #catalog-detail.open { transform: translateX(0); }
+
+  .detail-topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13,11,8,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 1.2rem 3rem;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: none; border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.1rem;
+    cursor: none; transition: background 0.3s, border-color 0.3s;
+  }
+  .btn-back:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
+  .btn-back svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .detail-topbar-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem; letter-spacing: 0.12em;
+    color: var(--cream); flex: 1;
+  }
+  .detail-topbar-subtitle {
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    color: var(--text-muted); text-transform: uppercase;
+  }
+
+  .detail-header {
+    padding: 4rem 3rem 2.5rem;
+    background: linear-gradient(to bottom, var(--dark2), var(--dark));
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    position: relative; overflow: hidden;
+  }
+  .detail-header::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .detail-header-content { max-width: 1100px; margin: 0 auto; }
+  .detail-category-tag {
+    font-size: 0.68rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  .detail-category-tag::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .detail-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700; line-height: 1.05;
+    margin-bottom: 0.5rem;
+  }
+  .detail-title em { color: var(--gold); font-style: italic; font-weight: 300; }
+  .detail-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic;
+    color: var(--text-muted); margin-top: 0.5rem;
+  }
+
+  .detail-gallery-wrap {
+    padding: 3rem 3rem 5rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .detail-gallery-label {
+    font-size: 0.68rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .detail-gallery-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, rgba(201,168,76,0.2), transparent);
+  }
+
+  .detail-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    background: var(--dark2);
+    border: 1px solid rgba(201,168,76,0.08);
+    overflow: hidden;
+    transition: border-color 0.4s, transform 0.35s, box-shadow 0.4s;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardIn 0.5s forwards;
+  }
+  .product-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  @keyframes cardIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .product-card-image {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    position: relative;
+    background: var(--dark3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .product-card-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: block;
+  }
+  .product-card:hover .product-card-image img { transform: scale(1.07); }
+
+  .product-card-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0.5rem;
+    color: var(--text-muted);
+    background: linear-gradient(135deg, var(--dark3), var(--dark2));
+  }
+  .product-card-placeholder .ph-icon { font-size: 3rem; opacity: 0.3; }
+  .product-card-placeholder .ph-label {
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; opacity: 0.4;
+  }
+
+  .product-card-image::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(201,168,76,0.08) 100%);
+    pointer-events: none;
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .product-card:hover .product-card-image::after { opacity: 1; }
+
+  .product-card-body { padding: 1.4rem 1.6rem 1.8rem; }
+  .product-card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--cream); margin-bottom: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+  .product-card-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--text-muted); line-height: 1.6;
+    margin-bottom: 0.8rem;
+    min-height: 1.6em;
+  }
+  .product-card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+  .product-card-price {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem; color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+  .product-card-price.no-price { color: transparent; }
+
+  .product-card-inquiry {
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text-muted);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.3s; cursor: none;
+  }
+  .product-card-inquiry:hover { color: var(--gold); }
+  .product-card-inquiry::before { content: '💬'; font-size: 0.8rem; }
+
+  .detail-empty {
+    text-align: center; padding: 5rem 2rem;
+    color: var(--text-muted);
+  }
+  .detail-empty-icon { font-size: 4rem; opacity: 0.2; margin-bottom: 1rem; }
+  .detail-empty-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-style: italic;
+  }
+
+  /* Lightbox */
+  #lightbox {
+    position: fixed; inset: 0; z-index: 1200;
+    background: rgba(0,0,0,0.92);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  #lightbox.open { opacity: 1; pointer-events: all; }
+  #lightbox img {
+    max-width: 90vw; max-height: 85vh;
+    object-fit: contain; border: 1px solid rgba(201,168,76,0.2);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    transition: transform 0.3s;
+  }
+  .lightbox-close {
+    position: fixed; top: 2rem; right: 2.5rem;
+    background: none; border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold); font-size: 1.2rem;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: none; transition: background 0.3s;
+  }
+  .lightbox-close:hover { background: rgba(201,168,76,0.1); }
+
+  /* =============================================
+     PROCESS
+  ============================================= */
+  .process { background: var(--dark); }
+  .process-inner { max-width: 1000px; margin: 0 auto; }
+  .process-steps { margin-top: 4rem; position: relative; }
+  .process-steps::before {
+    content: ''; position: absolute;
+    left: 28px; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .process-step {
+    display: flex; gap: 2.5rem; padding: 0 0 3.5rem 0;
+    opacity: 0; transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .process-step.visible { opacity: 1; transform: none; }
+  .step-number {
+    width: 56px; height: 56px; flex-shrink: 0;
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-size: 1rem;
+    color: var(--gold); background: var(--dark); z-index: 1;
+    transition: background 0.3s;
+  }
+  .process-step:hover .step-number { background: var(--gold); color: var(--dark); }
+  .step-content { padding-top: 0.8rem; }
+  .step-title {
+    font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600;
+    margin-bottom: 0.7rem; color: var(--cream);
+  }
+  .step-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+
+  /* =============================================
+     CONTACT
+  ============================================= */
+  .contact { background: var(--dark2); position: relative; overflow: hidden; }
+  .contact::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+  .contact-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: start;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .form-input, .form-select, .form-textarea {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.9rem 1.2rem; color: var(--cream);
+    font-family: 'Raleway', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.3s, background 0.3s;
+    cursor: none; appearance: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--gold); background: rgba(201,168,76,0.04);
+  }
+  .form-select option { background: var(--dark2); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 2.5rem; }
+  .contact-item { display: flex; gap: 1.5rem; align-items: flex-start; }
+  .contact-icon {
+    width: 48px; height: 48px; flex-shrink: 0;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  }
+  .contact-detail-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .contact-detail-val { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--cream); line-height: 1.5; }
+
+  /* =============================================
+     WHATSAPP FLOAT
+  ============================================= */
+  .whatsapp-float {
+    position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 400;
+    background: #25D366; width: 58px; height: 58px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none; transition: transform 0.3s, box-shadow 0.3s;
+    animation: pulse 2.5s infinite;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0.3); }
+    50%      { box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 0 0 12px rgba(37,211,102,0); }
+  }
+
+  /* =============================================
+     FOOTER
+  ============================================= */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.1em; }
+  .footer-tagline { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.15em; margin-top: 0.3rem; }
+  .footer-copy { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em; }
+  .footer-socials { display: flex; gap: 1rem; }
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: border-color 0.3s, color 0.3s; cursor: none;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* =============================================
+     UTILITY ANIMATIONS
+  ============================================= */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  .ornament { display: flex; align-items: center; gap: 1.5rem; color: var(--gold-dark); font-size: 0.9rem; margin: 2rem 0; }
+  .ornament-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dark)); }
+  .ornament-line.rev { background: linear-gradient(to left, transparent, var(--gold-dark)); }
+
+  /* =============================================
+     NOTIFICATION TOAST
+  ============================================= */
+  .notif {
+    position: fixed; top: 6rem; right: 2rem;
+    background: var(--dark2); border: 1px solid var(--gold);
+    padding: 1rem 1.5rem; z-index: 600;
+    transform: translateX(120%); transition: transform 0.4s; max-width: 300px;
+  }
+  .notif.show { transform: translateX(0); }
+  .notif-title { font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--gold); margin-bottom: 0.3rem; }
+  .notif-msg { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* =============================================
+     RESPONSIVE
+  ============================================= */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-bar { grid-template-columns: repeat(2,1fr); padding: 2rem 1.5rem; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .services-grid { grid-template-columns: 1fr; }
+    .catalog-grid { grid-template-columns: repeat(2,1fr); }
+    .catalog-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    footer { flex-direction: column; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    .detail-topbar { padding: 1rem 1.2rem; }
+    .detail-header { padding: 2.5rem 1.5rem 2rem; }
+    .detail-gallery-wrap { padding: 2rem 1.2rem 4rem; }
+    .detail-gallery { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">M<span>&amp;</span>M <span style="color:var(--text-muted);font-weight:300">Creation</span></a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Us</a></li>
+    <li><a href="#servicios">Services</a></li>
+    <li><a href="#catalogo">Catalog</a></li>
+    <li><a href="#proceso">Process</a></li>
+    <li><a href="#contacto" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">High-End Craftsmanship · Since 1996</div>
+    <span class="hero-crown">♛</span>
+    <h1 class="hero-title">
+      <span class="gold">M&amp;M</span><br>
+      <span>Creation</span><br>
+      <span style="font-size:0.5em;font-weight:300;font-style:italic;color:var(--text-muted);letter-spacing:0.1em">Luxury Fornitura</span>
+    </h1>
+    <p class="hero-subtitle">We transform wood into works of art for your home</p>
+    <div class="hero-actions">
+      <a href="#catalogo" class="btn-primary"><span>See Catalog</span></a>
+      <a href="#contacto" class="btn-ghost">Request a quote</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <span class="stat-num" data-count="250">0</span>
+    <span class="stat-label">Completed Projects</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-num" data-count="30">0</span>
+    <span class="stat-label">Years of Experience</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-num" data-count="100">0</span>
+    <span class="stat-label">% Handmade</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-num" data-count="180">0</span>
+    <span class="stat-label">Satisfied Customers</span>
+  </div>
+</div>
+
+<!-- =============================================
+     ABOUT — Professional image instead of tree icon
+============================================= -->
+<section class="about" id="nosotros">
+  <div class="about-inner">
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <!-- Professional carpentry/woodworking image -->
+        <img
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=85&auto=format&fit=crop"
+          alt="Master craftsman working on premium wood furniture"
+          loading="lazy"
+          onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(145deg,#2A2218,#5C3D1E 80%)';"
+        >
+      </div>
+      <div class="about-frame-border"></div>
+      <div class="about-accent">
+        Premium Wood<br>
+        <span style="font-size:0.75rem;opacity:0.7">Guaranteed Quality</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-tag reveal">Who we are</div>
+      <h2 class="section-title reveal">Art in Every<br><em style="color:var(--gold)">Wood Grain</em></h2>
+      <div class="ornament reveal">
+        <div class="ornament-line"></div>✦<div class="ornament-line rev"></div>
+      </div>
+      <p class="section-desc reveal" style="max-width:100%">
+        We are a company specializing in the creation of unique wooden furniture, decorations, and accessories. Each piece is designed and handcrafted by our artisans, combining traditional techniques with contemporary luxury design.
+      </p>
+      <p class="section-desc reveal" style="max-width:100%;margin-top:1.2rem;font-style:normal;font-family:'Raleway',sans-serif;font-size:0.9rem;line-height:1.9">
+        We work with select woods and high-density MDF to ensure that each piece is not only beautiful but also durable. From imposing bookshelves to decorative pedestals, your vision becomes reality.
+      </p>
+      <div style="margin-top:2.5rem" class="reveal">
+        <a href="#contacto" class="btn-primary"><span>Talk to us</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="servicios">
+  <div class="services-inner">
+    <div class="services-header">
+      <div class="section-tag reveal">What we do</div>
+      <h2 class="section-title reveal">Our <em style="color:var(--gold)">Services</em></h2>
+    </div>
+    <div class="services-grid reveal">
+
+      <!-- 01 Custom-made furniture -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=700&q=80&auto=format&fit=crop"
+            alt="Artisan crafting luxury custom wooden furniture"
+            loading="lazy"
+          >
+        </div>
+        <div class="service-body">
+          <span class="service-num">01</span>
+          <h3 class="service-name">Custom-made furniture</h3>
+          <p class="service-desc">We design and manufacture custom furniture that perfectly suits your spaces and lifestyle. Each piece is unique.</p>
+        </div>
+      </div>
+
+      <!-- 02 Interior Decoration -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80&auto=format&fit=crop"
+            alt="Elegant luxury interior with wooden decorative elements"
+            loading="lazy"
+          >
+        </div>
+        <div class="service-body">
+          <span class="service-num">02</span>
+          <h3 class="service-name">Interior Decoration</h3>
+          <p class="service-desc">We transform spaces with decorative wooden elements that bring warmth, texture and sophistication to every corner.</p>
+        </div>
+      </div>
+
+      <!-- 03 Handcrafted Carpentry -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80&auto=format&fit=crop"
+            alt="Master craftsman working with precision woodworking tools"
+            loading="lazy"
+          >
+        </div>
+        <div class="service-body">
+          <span class="service-num">03</span>
+          <h3 class="service-name">Handcrafted Carpentry</h3>
+          <p class="service-desc">Traditional techniques combined with modern tools. Every joint, every finish, executed with millimeter precision.</p>
+        </div>
+      </div>
+
+      <!-- 04 Premium Finishes -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop"
+            alt="Premium wood lacquer and varnish finishing on luxury furniture"
+            loading="lazy"
+          >
+        </div>
+        <div class="service-body">
+          <span class="service-num">04</span>
+          <h3 class="service-name">Premium Finishes</h3>
+          <p class="service-desc">Lacquers, varnishes, stains, and natural finishes. We highlight the natural beauty of each grain with the best products on the market.</p>
+        </div>
+      </div>
+
+      <!-- 05 Design and Consulting -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=700&q=80&auto=format&fit=crop"
+            alt="Interior designer working on furniture blueprint and sketches"
+            loading="lazy"
+          >
+        </div>
+        <div class="service-body">
+          <span class="service-num">05</span>
+          <h3 class="service-name">Design and Consulting</h3>
+          <p class="service-desc">We guide you from the initial concept to installation. Our designers create sketches and renderings before manufacturing begins.</p>
+        </div>
+      </div>
+
+      <!-- 06 Installation and Delivery -->
+      <div class="service-card">
+        <div class="service-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=700&q=80&auto=format&fit=crop"
+            alt="Professional furniture installation in luxury home interior"
+            loading="lazy"
+          >
+        </div>
+        <div class="service-body">
+          <span class="service-num">06</span>
+          <h3 class="service-name">Installation and Delivery</h3>
+          <p class="service-desc">We take care of the safe transport and professional installation of each piece so that it arrives perfectly at its final destination.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="catalog" id="catalogo">
+  <div class="catalog-inner">
+    <div class="catalog-header">
+      <div>
+        <div class="section-tag reveal">Products</div>
+        <h2 class="section-title reveal">Our <em style="color:var(--gold)">Catalog</em></h2>
+      </div>
+      <p class="reveal" style="font-size:0.78rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;">
+        Click any category to explore
+      </p>
+    </div>
+    <div class="catalog-grid" id="catalog-grid"></div>
+  </div>
+</section>
+
+<div id="catalog-detail" role="dialog" aria-modal="true" aria-labelledby="detail-title-text">
+  <div class="detail-topbar">
+    <button class="btn-back" id="btn-back" onclick="closeDetail()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Back to Catalog
+    </button>
+    <div style="flex:1">
+      <div class="detail-topbar-title" id="detail-topbar-title">—</div>
+      <div class="detail-topbar-subtitle">Product Collection</div>
+    </div>
+  </div>
+  <div class="detail-header">
+    <div class="detail-header-content">
+      <div class="detail-category-tag" id="detail-category-tag">Category</div>
+      <h2 class="detail-title" id="detail-title-text">—</h2>
+      <p class="detail-subtitle" id="detail-subtitle">—</p>
+    </div>
+  </div>
+  <div class="detail-gallery-wrap">
+    <div class="detail-gallery-label" id="detail-gallery-label">0 items</div>
+    <div class="detail-gallery" id="detail-gallery"></div>
+  </div>
+</div>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" title="Close">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<section class="process" id="proceso">
+  <div class="process-inner">
+    <div class="section-tag reveal">How we work</div>
+    <h2 class="section-title reveal">The <em style="color:var(--gold)">Creative Process</em></h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <h3 class="step-title">Initial Consultation</h3>
+          <p class="step-desc">We talk with you to understand your vision, needs, and available space. We listen to every detail to guarantee the perfect result.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <h3 class="step-title">Design and Sketch</h3>
+          <p class="step-desc">Our designers create digital plans and renderings so you can visualize your piece before it physically exists.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <h3 class="step-title">Material Selection</h3>
+          <p class="step-desc">Together we choose the wood, type of finish, tone, and texture. We only work with top-quality materials, selected one by one.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">04</div>
+        <div class="step-content">
+          <h3 class="step-title">Handcrafted Fabrication</h3>
+          <p class="step-desc">Our master carpenters bring your piece to life with precise techniques and meticulous care. Every cut, every assembly, with complete dedication.</p>
+        </div>
+      </div>
+      <div class="process-step" style="padding-bottom:0">
+        <div class="step-number">05</div>
+        <div class="step-content">
+          <h3 class="step-title">Delivery and Installation</h3>
+          <p class="step-desc">We coordinate safe transport and professional installation. Your satisfaction is our guarantee and the beginning of a lasting relationship.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-tag reveal">Let's talk</div>
+      <h2 class="section-title reveal">Request your<br><em style="color:var(--gold)">Quote</em></h2>
+      <div class="ornament reveal">
+        <div class="ornament-line"></div>♛<div class="ornament-line rev"></div>
+      </div>
+      <p class="section-desc reveal" style="max-width:100%;margin-bottom:3rem">
+        Tell us about your project and we'll get back to you as soon as possible with a personalized proposal.
+      </p>
+      <div class="contact-info">
+        <div class="contact-item reveal">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-detail-label">WhatsApp</div>
+            <div class="contact-detail-val">347-6625342 📱</div>
+            <div class="contact-detail-val">878-2001807 📞</div>
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-detail-label">Location</div>
+            <div class="contact-detail-val">
+              502 W 7TH ST, STE 100<br>ERIE, PA 16502-1333
+            </div>
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="contact-icon">⏰</div>
+          <div>
+            <div class="contact-detail-label">Schedule</div>
+            <div class="contact-detail-val">Mon–Fri, 8:00 AM – 6:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-input" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" class="form-input" placeholder="Your phone number">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Product of Interest</label>
+        <select class="form-select" id="contact-product-select">
+          <option value="">Select a product...</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tell us about your project</label>
+        <textarea class="form-textarea" placeholder="Describe your vision: dimensions, preferred materials, space, colors..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="handleSubmit()" style="width:100%;justify-content:center;border:none;font-size:0.8rem;">
+        <span>✦ Submit Request</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">M&amp;M Creation Luxury</div>
+    <div class="footer-tagline">Fornitura &amp; Decorations · Woodcraft</div>
+  </div>
+  <div class="footer-copy">© 2026 M&amp;M Creation Luxury. All rights reserved.</div>
+  <div class="footer-socials">
+    <a href="https://wa.me/3476625342" class="social-btn" title="WhatsApp">💬</a>
+    <a href="#" class="social-btn" title="Instagram">📸</a>
+    <a href="#" class="social-btn" title="Facebook">📘</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/3476625342" class="whatsapp-float" title="Write to us on WhatsApp">💬</a>
+
+<div class="notif" id="notif">
+  <div class="notif-title">✦ Message Sent</div>
+  <div class="notif-msg">Thank you! We'll contact you very soon with your personalized quote.</div>
+</div>
+
+<script>
+
+/* -----------------------------------------------
+   CATALOG DATA — now with coverImage for each category
+   (used in the main grid instead of icon emojis)
+----------------------------------------------- */
+const catalogData = {
+
+  "High Shelf": {
+    /* Professional image: tall wood bookshelf / display shelving */
+    coverImage: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80&auto=format&fit=crop",
+    coverAlt: "Tall luxury wooden display shelving unit",
+    tag: "Storage · Wood",
+    description: "Elegant tall shelving units crafted from select hardwood and premium MDF.",
+    items: [
+      { imagen: "2da.png", nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Stunning floor-standing arch backdrop integrated with functional shelves. Made from high-quality MDF, perfect for candy bars or floral displays.", precio: "" },
+      { imagen: "4.jpeg", nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Luxury freestanding arched display wall featuring premium integrated warm LED lighting. Crafted with an exquisite matte finish and depth, perfect for high-end event backdrops or sophisticated interior showcases.", precio: "" },
+      { imagen: "10.jpeg", nombre: "ARCHED BACKDROP SHELF", descripcion: "A versatile floor-standing arched backdrop integrated with four functional display shelves. Built from premium MDF, it serves as an excellent focal point for event styling, floral setups, and candy bars.", precio: "" },
+      { imagen: "13.jpeg", nombre: "FOLDING WOODEN LADDER SHELF", descripcion: "A charming, rustic-inspired folding display shelf crafted from natural pine wood slats. Its portable A-frame design makes it highly functional and perfect for showcasing floral arrangements, plants, or decorative items at events.", precio: "" },
+      { imagen: "16.jpeg", nombre: "PYRAMID LADDER SHELF", descripcion: "An elegant, multi-tiered pyramid display shelf finished in a premium sleek white coat. Its unique contemporary structure features expanding horizontal shelves, making it a perfect standout piece for high-end candy bars, luxury events, or sophisticated product showcases.", precio: "" },
+      { imagen: "27.jpeg", nombre: "OPEN CONCENTRIC ARCHWAY FRAME", descripcion: "A grand, freestanding open archway backdrop featuring clean-cut concentric layered lines. Precision-engineered from premium MDF and equipped with sturdy floor supports, it serves as a magnificent walk-through frame or central focal point for high-end celebrations.", precio: "" },
+      { imagen: "52.jpeg", nombre: "PREMIUM TALL WHITE SHELVING UNIT WITH LOWER CABINET", descripcion: "A striking, custom-built tall floor-standing display and storage unit masterfully finished in a clean matte white lacquer. The upper section features four thick, open horizontal shelving compartments with seamless structural lines, providing an elegant stage for books or decorative items. The lower base incorporates a sleek, minimalist two-door storage cabinet with a handleless design, offering hidden utility while maintaining a refined architectural profile.", precio: "" },
+    ]
+  },
+
+  "Gabinet": {
+    /* Professional image: luxury custom kitchen / cabinet interior */
+    coverImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80&auto=format&fit=crop",
+    coverAlt: "Luxury custom wooden cabinetry interior design",
+    tag: "Seating · Design",
+    description: "Clean-lined, handcrafted cabinets and cabinetry that marry form with exceptional function.",
+    items: [
+      { imagen: "2da.png", nombre: "LUXURY CURVED CABINET", descripcion: "Elegant vintage-inspired display cabinet with a smooth curved silhouette. Made from premium MDF, perfect as a central statement piece for events.", precio: "" },
+      { imagen: "3.jpeg", nombre: "MINIMALIST SLEEK CABINET", descripcion: "Premium longline storage cabinet featuring a handleless, seamless design. Finished in a matte white coat with a solid plinth base, offering maximum storage with a sophisticated, clean aesthetic.", precio: "" },
+      { imagen: "6.jpeg", nombre: "PREMIUM BAR & DISPLAY CABINET", descripcion: "An exquisite custom bar cabinet solution featuring integrated warm LED backlighting, elegant glass-front vitrines, and custom crown moldings. Built with precise craftsmanship to offer a luxurious showcase for fine glassware, premium spirits, and residential storage.", precio: "" },
+      { imagen: "7.jpeg", nombre: "MODERN SHAKER KITCHEN CABINETS", descripcion: "Premium modular kitchen cabinetry featuring a timeless white Shaker-style design. Built with seamless clean lines, soft-close hardware, and custom finishes, offering a bright, functional, and highly sophisticated culinary space.", precio: "" },
+      { imagen: "22.jpeg", nombre: "LUXURY CURVED CABINET", descripcion: "An elegant vintage-inspired display cabinet featuring a smooth, distinct curved silhouette. Precision-cut from high-quality MDF, this versatile piece stands out as a unique statement furniture for premium event design.", precio: "" },
+      { imagen: "30.jpeg", nombre: "CUSTOM BUILT-IN CLOSET SHELVING", descripcion: "A premium custom-built interior shelving unit designed for seamless closet integration. Featuring an asymmetric multi-compartment layout finished in a sleek matte white coat, this sturdy organizing structure offers an elegant and highly functional storage solution for high-end residential projects.", precio: "" },
+      { imagen: "32.jpeg", nombre: "MODERN ARCHED DISPLAY SHELF", descripcion: "A striking minimalist high shelf cabinet featuring a bold clean archway design and multiple spacious horizontal display decks. Meticulously finished in sleek matte white, its grand architectural profile delivers a high-end luxury feel for product showcases or upscale event backdrops.", precio: "" },
+      { imagen: "35.jpeg", nombre: "PREMIUM NATURAL WOOD CORNER VANITY", descripcion: "An exquisite space-saving corner vanity cabinet expertly handcrafted from premium natural wood, highlighting rich rustic grains and timeless Shaker-style doors.", precio: "" },
+      { imagen: "36.jpeg", nombre: "CUSTOM WALK-IN CLOSET SHELVING SYSTEM", descripcion: "A beautifully personalized built-in closet storage unit featuring a dual-tone pink and white finish.", precio: "" },
+      { imagen: "39.jpeg", nombre: "CUSTOM BUILT-IN WINDOW BENCH CABINET", descripcion: "A sophisticated, space-optimizing low-profile window bench custom-crafted for high-end residential interiors.", precio: "" },
+      { imagen: "40.jpeg", nombre: "CUSTOM BUILT-IN NATURAL WOOD WINDOW BENCH", descripcion: "A masterfully crafted low-profile window bench custom-integrated for high-end residential spaces.", precio: "" },
+      { imagen: "42.jpeg", nombre: "CUSTOM WOOD WINDOW BENCH CREDENZA", descripcion: "An elegant, low-profile bespoke window bench meticulously crafted from premium light-toned wood.", precio: "" },
+      { imagen: "43.jpeg", nombre: "PREMIUM L-SHAPED WALK-IN CLOSET SYSTEM", descripcion: "A masterfully designed custom L-shaped walk-in closet maximized for high-end residential storage.", precio: "" },
+      { imagen: "44.jpeg", nombre: "MODERN ANTHRACITE WALK-IN CLOSET SYSTEM", descripcion: "A premium, large-scale custom L-shaped walk-in closet system masterfully finished in a contemporary dark anthracite gray coating.", precio: "" },
+      { imagen: "45.jpeg", nombre: "MODERN ERGONOMIC CORNER CLOSET TOWER", descripcion: "A large-scale, high-capacity custom walk-in closet module tailored for seamless corner placement.", precio: "" },
+      { imagen: "46.jpeg", nombre: "PREMIUM NATURAL OAK MODULAR WARDROBE", descripcion: "A high-end modular reach-in closet assembly meticulously built from light natural oak wood.", precio: "" },
+      { imagen: "47.jpeg", nombre: "PREMIUM COBALT BLUE MODULAR KITCHEN CABINETRY", descripcion: "A striking, custom-engineered L-shaped residential kitchen cabinetry suite masterfully finished in a bold matte cobalt blue.", precio: "" },
+    ]
+  },
+
+  "Cylindrical Pedestal": {
+    /* Professional image: white cylindrical event pedestals */
+    coverImage: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=600&q=80&auto=format&fit=crop",
+    coverAlt: "White cylindrical display pedestals for luxury events",
+    tag: "Decoration · MDF",
+    description: "Sculptural pedestals that elevate any object into a statement piece.",
+    items: [
+      { imagen: "2da.png", nombre: "SLATTED CYLINDRICAL PEDESTAL", descripcion: "Modern cylindrical display pedestal featuring a stylish wooden slat design. Adds architectural texture and elegance to any event showcase.", precio: "" },
+      { imagen: "9.jpeg", nombre: "NATURAL WOOD CYLINDRICAL PEDESTAL", descripcion: "Solid cylindrical display pedestal featuring a beautiful, clean natural wood grain. Perfectly sanded and ready to display premium products or event floral arrangements.", precio: "" },
+      { imagen: "19.jpeg", nombre: "NATURAL WOOD CYLINDRICAL PEDESTAL SET", descripcion: "A premium set of three nesting cylindrical display pedestals of varying heights, beautifully crafted from natural wood.", precio: "" },
+      { imagen: "23.jpeg", nombre: "FLUTED CYLINDRICAL PEDESTAL SET", descripcion: "A spectacular nesting set of three cylindrical display pedestals crafted with a premium fluted texture.", precio: "" },
+    ]
+  },
+
+  "Round Table": {
+    /* Professional image: luxury round dining table */
+    coverImage: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=600&q=80&auto=format&fit=crop",
+    coverAlt: "Luxury round wooden dining table in elegant interior",
+    tag: "Furniture · Premium",
+    description: "Solid wood round tables that invite conversation and craftsmanship.",
+    items: [
+      { imagen: "9.jpeg", nombre: "SLATTED HOURGLASS ROUND PEDESTAL", descripcion: "Architectural round pedestal featuring a unique hourglass silhouette made of vertical wooden slats. Ideal for modern events, adding texture and an upscale geometric feel.", precio: "" },
+      { imagen: "24.jpeg", nombre: "SLATTED HOURGLASS ROUND PEDESTAL", descripcion: "An architectural round pedestal featuring an elegant hourglass silhouette made of precision-spaced vertical wooden slats.", precio: "" },
+      { imagen: "28.jpeg", nombre: "SLATTED HOURGLASS ROUND PEDESTAL SET", descripcion: "A stunning nesting set of three geometric round pedestals featuring a distinct hourglass silhouette crafted from precision-spaced vertical wooden slats.", precio: "" },
+      { imagen: "51 2.jpeg", nombre: "LUXURY SUNBURST VENEERED ROUND EXECUTIVE CONFERENCE TABLE", descripcion: "A magnificent, large-scale round executive conference or dining table featuring an extraordinary sunburst radial veneer pattern crafted from premium high-contrast dark exotic hardwood.", precio: "" },
+      { imagen: "54 3.jpeg", nombre: "PREMIUM WHITE FLUTED HOURGLASS PEDESTAL TABLE", descripcion: "A striking architectural accent table or display pedestal masterfully finished in a clean matte white lacquer.", precio: "" },
+    ]
+  },
+
+  "Side Table + Stool": {
+    /* Professional image: elegant side table and stool set */
+    coverImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80&auto=format&fit=crop",
+    coverAlt: "Elegant wooden side table and stool set in modern interior",
+    tag: "Decorative Set",
+    description: "Matching auxiliary table and decorative stool sets in premium wood.",
+    items: [
+      { imagen: "2da.png", nombre: "ARCHED SIDE TABLE", descripcion: "Minimalist side table featuring clean, modern arched leg details. Versatile design suitable for product displays or event styling.", precio: "" },
+      { imagen: "9.jpeg", nombre: "GEOMETRIC MINI STOOL", descripcion: "Exquisitely crafted decorative mini stool or riser with abstract curved leg details. Perfect for adding varied heights to cake displays or dessert tables.", precio: "" },
+      { imagen: "48.jpeg", nombre: "PREMIUM L-SHAPED EXECUTIVE RECEPTION DESK", descripcion: "A professional, large-scale L-shaped modular reception workstation crafted with high-end medium brown wood grain laminate panels.", precio: "" },
+      { imagen: "49.jpeg", nombre: "MINIMALIST TWO-TONE COMMERCIAL RECEPTION DESK", descripcion: "A sleek, contemporary reception counter designed for modern commercial spaces and upscale storefronts.", precio: "" },
+      { imagen: "54 2.jpeg", nombre: "ARCHITECTURAL SEMICIRCULAR TIERED DISPLAY STAGE", descripcion: "A unique, custom-engineered semicircular tiered display structure finished in a flawless matte white coat.", precio: "" },
+    ]
+  },
+
+  "Baby Decorative Blocks": {
+    /* Professional image: wooden baby letter blocks */
+    coverImage: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80&auto=format&fit=crop",
+    coverAlt: "Wooden baby decorative letter blocks for baby shower",
+    tag: "Children's Decoration",
+    description: "Safe, hand-finished wooden blocks designed to delight and inspire.",
+    items: [
+      { imagen: "2da.png", nombre: "BABY DECORATIVE BLOCKS", descripcion: "Set of 4 stackable wooden alphabet cubes spelling Baby. Crafted from smooth MDF, ideal for baby showers, gender reveals, and nursery decor.", precio: "" },
+      { imagen: "5.jpeg", nombre: "BABY DECORATIVE BLOCKS", descripcion: "Premium set of 4 freestanding alphabet wooden cubes spelling BABY. Expertly crafted from high-quality MDF with elegant raised relief lettering.", precio: "" },
+      { imagen: "9.jpeg", nombre: "BABY DECORATIVE BLOCKS — MODEL C", descripcion: "Stackable MDF alphabet cubes spelling 'BABY' with elegant raised relief details. A classic, sturdy choice for premium event styling and baby showers.", precio: "" },
+      { imagen: "29.jpeg", nombre: "BABY DECORATIVE BLOCKS SET", descripcion: "A grand display featuring multiple sets of precision-crafted MDF alphabet cubes spelling 'BABY'. Characterized by crisp raised relief lettering and perfectly square structural framing.", precio: "" },
+    ]
+  },
+
+  "Decorative Arched Panel": {
+    /* Professional image: arched MDF decorative panel / arch backdrop */
+    coverImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80&auto=format&fit=crop",
+    coverAlt: "Decorative arched MDF panel luxury wall art backdrop",
+    tag: "Panel · Art",
+    description: "Architectural wall panels with graceful arched forms, a signature piece.",
+    items: [
+      { imagen: "1ra.jpeg", nombre: "DECORATIVE ARCHED PANEL", descripcion: "Elegant multi-layered concentric arch structure with a smooth premium finish. Perfect as a modern focal point or event backdrop.", precio: "" },
+      { imagen: "4.jpeg", nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Luxury freestanding arched display wall featuring premium integrated warm LED lighting.", precio: "" },
+      { imagen: "8.jpeg", nombre: "FLUTED ARCHED PANEL", descripcion: "Features an elegant, precision-crafted fluted texture with seamless concentric arch channels. Made from high-grade MDF, providing a sophisticated architectural backdrop or high-end wall art panel.", precio: "165" },
+      { imagen: "9.jpeg", nombre: "BUTTERFLY SILHOUETTE PANEL", descripcion: "Stunning precision-cut MDF panel featuring an intricate butterfly silhouette design. Adds a whimsical and elegant touch as a freestanding decorative prop for photography or events.", precio: "" },
+      { imagen: "15.jpeg", nombre: "HALF ARCH BACKGROUND PANELS", descripcion: "A modern set of two nesting half-arch backdrop panels crafted from premium MDF.", precio: "" },
+      { imagen: "17.jpeg", nombre: "MULTI-LAYERED LIGHT UP ARCHED PANEL WITH PEDESTAL", descripcion: "An architectural masterpiece featuring a precision-routed concentric arch panel integrated with warm ambient LED backlighting.", precio: "" },
+    ]
+  },
+
+  "Decorative MDF Cube": {
+    /* Professional image: white MDF cube display pedestal */
+    coverImage: "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?w=600&q=80&auto=format&fit=crop",
+    coverAlt: "White decorative MDF cube display pedestal minimalist design",
+    tag: "Decoration · MDF Premium",
+    description: "Versatile decorative cubes that serve as display stands, seats, or art.",
+    items: [
+      { imagen: "9.jpeg", nombre: "PREMIUM CUBIC DISPLAY PEDESTAL — MODEL A", descripcion: "Seamless and sturdy MDF cubic display block. Clean-cut and perfectly smooth, designed as a versatile pedestal for modern product showcases or artistic event arrangements.", precio: "" },
+    ]
+  }
+
+};
+
+const WA_NUMBER = "3476625342";
+
+/* -----------------------------------------------
+   RENDER MAIN CATALOG GRID — now with real images
+----------------------------------------------- */
+function renderCatalogGrid() {
+  const grid    = document.getElementById('catalog-grid');
+  const select  = document.getElementById('contact-product-select');
+  const entries = Object.entries(catalogData);
+
+  grid.innerHTML = '';
+
+  entries.forEach(([name, data], index) => {
+    const count = data.items.length;
+
+    const card = document.createElement('div');
+    card.className = 'catalog-item reveal';
+    card.style.transitionDelay = (index * 0.08) + 's';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Open ${name} catalog`);
+
+    card.innerHTML = `
+      <div class="catalog-count-badge">${count} item${count !== 1 ? 's' : ''}</div>
+      <div class="open-hint"><span class="open-hint-label">Explore →</span></div>
+      <div class="catalog-thumb">
+        <img
+          src="${data.coverImage}"
+          alt="${data.coverAlt || name}"
+          loading="lazy"
+          onerror="this.parentElement.innerHTML='<div class=\\'catalog-thumb-fallback\\'>🪵</div>'"
+        >
+      </div>
+      <div class="catalog-info">
+        <div class="catalog-num">Category ${String(index + 1).padStart(2, '0')}</div>
+        <div class="catalog-name">${name}</div>
+        <div class="catalog-tag">${data.tag}</div>
+      </div>
+    `;
+
+    card.addEventListener('click', () => openDetail(name));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter') openDetail(name); });
+
+    grid.appendChild(card);
+
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    select.appendChild(opt);
+  });
+
+  observeReveals();
+}
+
+/* -----------------------------------------------
+   OPEN DETAIL PANEL
+----------------------------------------------- */
+function openDetail(categoryName) {
+  const data    = catalogData[categoryName];
+  if (!data) return;
+
+  const panel   = document.getElementById('catalog-detail');
+  const gallery = document.getElementById('detail-gallery');
+
+  document.getElementById('detail-topbar-title').textContent   = categoryName;
+  document.getElementById('detail-category-tag').textContent   = data.tag;
+  document.getElementById('detail-title-text').innerHTML       = categoryName.replace(/ /g, '<br>');
+  document.getElementById('detail-subtitle').textContent       = data.description;
+  document.getElementById('detail-gallery-label').textContent  =
+    `${data.items.length} item${data.items.length !== 1 ? 's' : ''} in this collection`;
+
+  gallery.innerHTML = '';
+
+  if (data.items.length === 0) {
+    gallery.innerHTML = `
+      <div class="detail-empty" style="grid-column:1/-1">
+        <div class="detail-empty-icon">🪵</div>
+        <p class="detail-empty-text">This collection is coming soon.</p>
+      </div>
+    `;
+  } else {
+    data.items.forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.style.animationDelay = (i * 0.1) + 's';
+
+      const hasImage = item.imagen && item.imagen.trim() !== '';
+      const imageHtml = hasImage
+        ? `<img src="${item.imagen}" alt="${item.nombre}"
+               loading="lazy"
+               onerror="this.parentElement.innerHTML = placeholderHTML('🪵')"
+               onclick="openLightbox('${item.imagen}', '${item.nombre.replace(/'/g,"\\'")}');">`
+        : `<div class="product-card-placeholder">
+             <span class="ph-icon">🪵</span>
+             <span class="ph-label">Image coming soon</span>
+           </div>`;
+
+      const waMsg  = encodeURIComponent(`Hello! I'm interested in: ${item.nombre} — ${categoryName}`);
+      const waHref = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
+
+      card.innerHTML = `
+        <div class="product-card-image">${imageHtml}</div>
+        <div class="product-card-body">
+          <div class="product-card-name">${item.nombre}</div>
+          <div class="product-card-desc">${item.descripcion || ''}</div>
+          <div class="product-card-footer">
+            <span class="product-card-price ${item.precio ? '' : 'no-price'}">
+              ${item.precio || '—'}
+            </span>
+            <a href="${waHref}" class="product-card-inquiry" target="_blank" rel="noopener">
+              Inquire
+            </a>
+          </div>
+        </div>
+      `;
+
+      gallery.appendChild(card);
+    });
+  }
+
+  panel.classList.add('open');
+  panel.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  document.getElementById('btn-back').focus();
+}
+
+function closeDetail() {
+  const panel = document.getElementById('catalog-detail');
+  panel.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function placeholderHTML(icon) {
+  return `<div class="product-card-placeholder">
+    <span class="ph-icon">${icon}</span>
+    <span class="ph-label">Image not found</span>
+  </div>`;
+}
+
+function openLightbox(src, alt) {
+  const lb  = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src; img.alt = alt || '';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  if (!document.getElementById('catalog-detail').classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeLightbox(); closeDetail(); }
+});
+
+/* Custom cursor */
+const cursorEl = document.getElementById('cursor');
+const ringEl   = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  cursorEl.style.left = mx + 'px'; cursorEl.style.top = my + 'px';
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ringEl.style.left = rx + 'px'; ringEl.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+document.addEventListener('mouseover', e => {
+  if (e.target.closest('a, button, .catalog-item, .service-card, .product-card, [role="button"]')) {
+    cursorEl.classList.add('hover'); ringEl.classList.add('hover');
+  } else {
+    cursorEl.classList.remove('hover'); ringEl.classList.remove('hover');
+  }
+});
+
+/* Nav scroll */
+const navEl = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  navEl.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+/* Hero particles */
+const particlesEl = document.getElementById('particles');
+for (let i = 0; i < 18; i++) {
+  const p    = document.createElement('div');
+  p.className = 'wood-shape';
+  const size  = Math.random() * 20 + 8;
+  p.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random() * 100}%;
+    bottom:-${size}px;
+    animation-duration:${Math.random() * 15 + 10}s;
+    animation-delay:${Math.random() * 8}s;
+    background:rgba(201,168,76,0.15);
+    transform:rotate(${Math.random() * 360}deg);
+    border-radius:${Math.random() > 0.5 ? '0' : '50%'};
+  `;
+  particlesEl.appendChild(p);
+}
+
+/* Intersection observer */
+function observeReveals() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        const num = e.target.querySelector('[data-count]');
+        if (num && !num.dataset.counted) { num.dataset.counted = '1'; countUp(num); }
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .process-step').forEach(el => io.observe(el));
+}
+observeReveals();
+
+function countUp(el) {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.count == '100' ? '%' : '+';
+  let current  = 0;
+  const step   = target / 60;
+  const timer  = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current) + suffix;
+    if (current >= target) clearInterval(timer);
+  }, 20);
+}
+
+function handleSubmit() {
+  const notif = document.getElementById('notif');
+  notif.classList.add('show');
+  setTimeout(() => notif.classList.remove('show'), 4000);
+}
+
+renderCatalogGrid();
+</script>
+</body>
+</html>
