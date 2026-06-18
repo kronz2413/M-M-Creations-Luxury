@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M&M Creation Luxury — Fornitura & Decorations</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root {
     --gold: #C9A84C;
@@ -31,7 +33,6 @@
     cursor: none;
   }
 
-  /* ── CUSTOM CURSOR ── */
   .cursor {
     width: 12px; height: 12px;
     background: var(--gold);
@@ -57,7 +58,6 @@
   .cursor.hover { width: 20px; height: 20px; }
   .cursor-ring.hover { width: 56px; height: 56px; opacity: 0.3; }
 
-  /* ── GRAIN OVERLAY ── */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -67,7 +67,6 @@
     z-index: 1000;
   }
 
-  /* ── NAVIGATION ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
     z-index: 500;
@@ -103,7 +102,6 @@
   .nav-cta:hover { background: var(--gold) !important; color: var(--dark) !important; }
   .nav-cta::after { display: none; }
 
-  /* ── HERO ── */
   .hero {
     min-height: 100vh; position: relative;
     display: flex; align-items: center; justify-content: center; overflow: hidden;
@@ -176,7 +174,6 @@
     100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
   }
 
-  /* ── STATS BAR ── */
   .stats-bar {
     background: var(--dark2);
     border-top: 1px solid rgba(201,168,76,0.15);
@@ -189,7 +186,6 @@
   .stat-num { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold); display: block; }
   .stat-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.3rem; }
 
-  /* ── SECTION BASE ── */
   section { padding: 7rem 3rem; position: relative; }
   .section-tag {
     font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold);
@@ -199,7 +195,6 @@
   .section-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600; line-height: 1.1; margin-bottom: 1.5rem; }
   .section-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--text-muted); max-width: 550px; line-height: 1.7; }
 
-  /* ── BUTTONS ── */
   .btn-primary {
     background: var(--gold); color: var(--dark); padding: 1rem 2.5rem;
     font-family: 'Raleway', sans-serif; font-size: 0.78rem; font-weight: 600;
@@ -222,7 +217,6 @@
   }
   .btn-ghost:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
 
-  /* ── ABOUT ── */
   .about { background: var(--dark2); }
   .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
   .about-visual { position: relative; }
@@ -240,7 +234,6 @@
   .about-frame-border { position: absolute; top: -15px; right: -15px; bottom: 15px; left: 15px; border: 1px solid rgba(201,168,76,0.3); pointer-events: none; z-index: 2; }
   .about-accent { position: absolute; bottom: -20px; left: -20px; background: var(--gold); padding: 1.5rem 2rem; font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--dark); letter-spacing: 0.1em; z-index: 3; }
 
-  /* ── SERVICES ── */
   .services { background: var(--dark); }
   .services-inner { max-width: 1200px; margin: 0 auto; }
   .services-header { margin-bottom: 4rem; }
@@ -275,7 +268,6 @@
   .service-num { position: absolute; top: 1.5rem; right: 2rem; font-family: 'Cinzel', serif; font-size: 3.5rem; font-weight: 700; color: rgba(201,168,76,0.06); line-height: 1; transition: color 0.4s; pointer-events: none; }
   .service-card:hover .service-num { color: rgba(201,168,76,0.14); }
 
-  /* ── CATALOG MAIN GRID ── */
   .catalog { background: var(--dark2); }
   .catalog-inner { max-width: 1200px; margin: 0 auto; }
   .catalog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
@@ -319,7 +311,6 @@
     font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.15em; padding: 0.25rem 0.6rem; pointer-events: none;
   }
 
-  /* ── CATALOG DETAIL PANEL ── */
   #catalog-detail { position: fixed; inset: 0; background: var(--dark); z-index: 800; overflow-y: auto; transform: translateX(100%); transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1); will-change: transform; }
   #catalog-detail.open { transform: translateX(0); }
   .detail-topbar { position: sticky; top: 0; z-index: 10; background: rgba(13,11,8,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 1.2rem 3rem; display: flex; align-items: center; gap: 1.5rem; }
@@ -364,14 +355,12 @@
   .detail-empty-icon { font-size: 4rem; opacity: 0.2; margin-bottom: 1rem; }
   .detail-empty-text { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; }
 
-  /* ── LIGHTBOX ── */
   #lightbox { position: fixed; inset: 0; z-index: 1200; background: rgba(0,0,0,0.92); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   #lightbox.open { opacity: 1; pointer-events: all; }
   #lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border: 1px solid rgba(201,168,76,0.2); box-shadow: 0 30px 80px rgba(0,0,0,0.8); transition: transform 0.3s; }
   .lightbox-close { position: fixed; top: 2rem; right: 2.5rem; background: none; border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-size: 1.2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: none; transition: background 0.3s; }
   .lightbox-close:hover { background: rgba(201,168,76,0.1); }
 
-  /* ── PROCESS ── */
   .process { background: var(--dark); }
   .process-inner { max-width: 1000px; margin: 0 auto; }
   .process-steps { margin-top: 4rem; position: relative; }
@@ -384,7 +373,6 @@
   .step-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.7rem; color: var(--cream); }
   .step-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
 
-  /* ── CONTACT ── */
   .contact { background: var(--dark2); position: relative; overflow: hidden; }
   .contact::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%); }
   .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
@@ -392,10 +380,6 @@
   .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
   .form-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
 
-  /* ─────────────────────────────────────────────
-     FIX: restore normal cursor on all form fields
-     so they are properly clickable / focusable
-  ───────────────────────────────────────────── */
   .form-input,
   .form-select,
   .form-textarea {
@@ -404,13 +388,10 @@
     padding: 0.9rem 1.2rem; color: var(--cream);
     font-family: 'Raleway', sans-serif; font-size: 0.9rem;
     outline: none; transition: border-color 0.3s, background 0.3s;
-    /* cursor: none  ← REMOVED; was blocking mouse interaction */
-    cursor: text;   /* text cursor for inputs/textarea */
+    cursor: text;
     appearance: none;
   }
-  .form-select {
-    cursor: pointer; /* pointer for the dropdown */
-  }
+  .form-select { cursor: pointer; }
   .form-input:focus, .form-select:focus, .form-textarea:focus {
     border-color: var(--gold); background: rgba(201,168,76,0.04);
   }
@@ -418,8 +399,41 @@
   .form-textarea { resize: vertical; min-height: 120px; cursor: text; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 
-  /* Also fix the submit button inside the form */
   .contact .btn-primary { cursor: pointer; }
+
+  /* ── SUBMIT BUTTON STATES ── */
+  .btn-submit {
+    background: var(--gold); color: var(--dark); padding: 1rem 2.5rem;
+    font-family: 'Raleway', sans-serif; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase; border: none; cursor: pointer;
+    width: 100%; position: relative; overflow: hidden; transition: box-shadow 0.3s, opacity 0.3s;
+  }
+  .btn-submit::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold-light); transform: translateX(-100%) skewX(-15deg); transition: transform 0.4s;
+  }
+  .btn-submit:hover::before { transform: translateX(100%) skewX(-15deg); }
+  .btn-submit:hover { box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+  .btn-submit span { position: relative; z-index: 1; }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-submit:disabled::before { display: none; }
+
+  /* Spinner inside button */
+  .btn-spinner {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(13,11,8,0.3); border-top-color: var(--dark);
+    border-radius: 50%; animation: spin 0.7s linear infinite;
+    vertical-align: middle; margin-right: 0.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Field error highlight */
+  .form-input.error, .form-select.error, .form-textarea.error {
+    border-color: #c0392b;
+  }
+  .field-error {
+    font-size: 0.7rem; color: #e74c3c; letter-spacing: 0.05em; margin-top: 0.2rem;
+  }
 
   .contact-info { display: flex; flex-direction: column; gap: 2.5rem; }
   .contact-item { display: flex; gap: 1.5rem; align-items: flex-start; }
@@ -427,7 +441,6 @@
   .contact-detail-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
   .contact-detail-val { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--cream); line-height: 1.5; }
 
-  /* ── WHATSAPP FLOAT ── */
   .whatsapp-float { position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 400; background: #25D366; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; animation: pulse 2.5s infinite; }
   .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
   @keyframes pulse {
@@ -435,7 +448,6 @@
     50%      { box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 0 0 12px rgba(37,211,102,0); }
   }
 
-  /* ── FOOTER ── */
   footer { background: var(--dark); border-top: 1px solid rgba(201,168,76,0.15); padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
   .footer-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.1em; }
   .footer-tagline { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.15em; margin-top: 0.3rem; }
@@ -444,7 +456,6 @@
   .social-btn { width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; color: var(--text-muted); transition: border-color 0.3s, color 0.3s; cursor: none; }
   .social-btn:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ── UTILITY ANIMATIONS ── */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
   .reveal.visible { opacity: 1; transform: none; }
@@ -453,12 +464,20 @@
   .ornament-line.rev { background: linear-gradient(to left, transparent, var(--gold-dark)); }
 
   /* ── NOTIFICATION TOAST ── */
-  .notif { position: fixed; top: 6rem; right: 2rem; background: var(--dark2); border: 1px solid var(--gold); padding: 1rem 1.5rem; z-index: 600; transform: translateX(120%); transition: transform 0.4s; max-width: 300px; }
+  .notif {
+    position: fixed; top: 6rem; right: 2rem;
+    background: var(--dark2); border: 1px solid var(--gold);
+    padding: 1.2rem 1.6rem; z-index: 600;
+    transform: translateX(120%); transition: transform 0.4s;
+    max-width: 320px; display: flex; align-items: flex-start; gap: 1rem;
+  }
   .notif.show { transform: translateX(0); }
+  .notif.notif-error { border-color: #c0392b; }
+  .notif-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; }
   .notif-title { font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--gold); margin-bottom: 0.3rem; }
-  .notif-msg { font-size: 0.82rem; color: var(--text-muted); }
+  .notif.notif-error .notif-title { color: #e74c3c; }
+  .notif-msg { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
@@ -660,33 +679,35 @@
         </div>
       </div>
     </div>
+
+    <!-- ── CONTACT FORM ── -->
     <div class="contact-form reveal">
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Name</label>
-          <input type="text" class="form-input" placeholder="Your full name">
+          <label class="form-label" for="f-name">Name *</label>
+          <input type="text" id="f-name" class="form-input" placeholder="Your full name">
         </div>
         <div class="form-group">
-          <label class="form-label">Phone</label>
-          <input type="tel" class="form-input" placeholder="Your phone number">
+          <label class="form-label" for="f-phone">Phone</label>
+          <input type="tel" id="f-phone" class="form-input" placeholder="Your phone number">
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">Email</label>
-        <input type="email" class="form-input" placeholder="your@email.com">
+        <label class="form-label" for="f-email">Email *</label>
+        <input type="email" id="f-email" class="form-input" placeholder="your@email.com">
       </div>
       <div class="form-group">
-        <label class="form-label">Product of Interest</label>
-        <select class="form-select" id="contact-product-select">
+        <label class="form-label" for="f-product">Product of Interest</label>
+        <select id="f-product" class="form-select">
           <option value="">Select a product...</option>
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">Tell us about your project</label>
-        <textarea class="form-textarea" placeholder="Describe your vision: dimensions, preferred materials, space, colors..."></textarea>
+        <label class="form-label" for="f-message">Tell us about your project *</label>
+        <textarea id="f-message" class="form-textarea" placeholder="Describe your vision: dimensions, preferred materials, space, colors..."></textarea>
       </div>
-      <button class="btn-primary" onclick="handleSubmit()" style="width:100%;justify-content:center;border:none;font-size:0.8rem;">
-        <span>✦ Submit Request</span>
+      <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+        <span id="btn-submit-label">✦ Submit Request</span>
       </button>
     </div>
   </div>
@@ -704,12 +725,53 @@
 
 <a href="https://wa.me/3476625342" class="whatsapp-float" title="Write to us on WhatsApp">💬</a>
 
+<!-- Toast Notification -->
 <div class="notif" id="notif">
-  <div class="notif-title">✦ Message Sent</div>
-  <div class="notif-msg">Thank you! We'll contact you very soon with your personalized quote.</div>
+  <div class="notif-icon" id="notif-icon">✦</div>
+  <div>
+    <div class="notif-title" id="notif-title">Message Sent</div>
+    <div class="notif-msg" id="notif-msg">Thank you! We'll contact you very soon with your personalized quote.</div>
+  </div>
 </div>
 
 <script>
+/* ══════════════════════════════════════════════════════════════
+   EmailJS CONFIGURATION
+   ══════════════════════════════════════════════════════════════
+   To activate email sending, complete the 3 steps below:
+
+   STEP 1 — Create a FREE account at https://www.emailjs.com
+   STEP 2 — Add an Email Service (Gmail, Outlook, etc.) and note your Service ID
+   STEP 3 — Create an Email Template and note your Template ID
+
+   In your EmailJS template, use these variables:
+     {{from_name}}    → sender's name
+     {{from_email}}   → sender's email
+     {{phone}}        → sender's phone
+     {{product}}      → product of interest
+     {{message}}      → project description
+     {{sent_date}}    → date & time of submission
+
+   Then replace the three placeholder values below with your real IDs:
+   ══════════════════════════════════════════════════════════════ */
+
+const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";   // e.g. "user_aBcDeFgHiJkLmNoPqRsT"
+const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";   // e.g. "service_mm_creation"
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";  // e.g. "template_quote_request"
+
+/* Destination email — also set this inside your EmailJS template */
+const DEST_EMAIL = "mmcreationluxuryforniture@outlook.com";
+
+/* ══════════════════════════════════════════════════════════════ */
+
+// Init EmailJS
+(function() {
+  if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }
+})();
+
+/* ── CATALOG DATA ── */
 const catalogData = {
   "High Shelf": {
     coverImage: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80&auto=format&fit=crop",
@@ -717,13 +779,13 @@ const catalogData = {
     tag: "Storage · Wood",
     description: "Elegant tall shelving units crafted from select hardwood and premium MDF.",
     items: [
-      { imagen: "2da.png", nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Stunning floor-standing arch backdrop integrated with functional shelves. Made from high-quality MDF, perfect for candy bars or floral displays.", precio: "" },
-      { imagen: "4.jpeg", nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Luxury freestanding arched display wall featuring premium integrated warm LED lighting. Crafted with an exquisite matte finish and depth, perfect for high-end event backdrops or sophisticated interior showcases.", precio: "" },
-      { imagen: "10.jpeg", nombre: "ARCHED BACKDROP SHELF", descripcion: "A versatile floor-standing arched backdrop integrated with four functional display shelves. Built from premium MDF, it serves as an excellent focal point for event styling, floral setups, and candy bars.", precio: "" },
-      { imagen: "13.jpeg", nombre: "FOLDING WOODEN LADDER SHELF", descripcion: "A charming, rustic-inspired folding display shelf crafted from natural pine wood slats. Its portable A-frame design makes it highly functional and perfect for showcasing floral arrangements, plants, or decorative items at events.", precio: "" },
-      { imagen: "16.jpeg", nombre: "PYRAMID LADDER SHELF", descripcion: "An elegant, multi-tiered pyramid display shelf finished in a premium sleek white coat. Its unique contemporary structure features expanding horizontal shelves, making it a perfect standout piece for high-end candy bars, luxury events, or sophisticated product showcases.", precio: "" },
-      { imagen: "27.jpeg", nombre: "OPEN CONCENTRIC ARCHWAY FRAME", descripcion: "A grand, freestanding open archway backdrop featuring clean-cut concentric layered lines. Precision-engineered from premium MDF and equipped with sturdy floor supports, it serves as a magnificent walk-through frame or central focal point for high-end celebrations.", precio: "" },
-      { imagen: "52.jpeg", nombre: "PREMIUM TALL WHITE SHELVING UNIT WITH LOWER CABINET", descripcion: "A striking, custom-built tall floor-standing display and storage unit masterfully finished in a clean matte white lacquer.", precio: "" },
+      { imagen: "2da.png",   nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Stunning floor-standing arch backdrop integrated with functional shelves. Made from high-quality MDF, perfect for candy bars or floral displays.", precio: "" },
+      { imagen: "4.jpeg",    nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Luxury freestanding arched display wall featuring premium integrated warm LED lighting. Crafted with an exquisite matte finish and depth, perfect for high-end event backdrops or sophisticated interior showcases.", precio: "" },
+      { imagen: "10.jpeg",   nombre: "ARCHED BACKDROP SHELF", descripcion: "A versatile floor-standing arched backdrop integrated with four functional display shelves. Built from premium MDF, it serves as an excellent focal point for event styling, floral setups, and candy bars.", precio: "" },
+      { imagen: "13.jpeg",   nombre: "FOLDING WOODEN LADDER SHELF", descripcion: "A charming, rustic-inspired folding display shelf crafted from natural pine wood slats.", precio: "" },
+      { imagen: "16.jpeg",   nombre: "PYRAMID LADDER SHELF", descripcion: "An elegant, multi-tiered pyramid display shelf finished in a premium sleek white coat.", precio: "" },
+      { imagen: "27.jpeg",   nombre: "OPEN CONCENTRIC ARCHWAY FRAME", descripcion: "A grand, freestanding open archway backdrop featuring clean-cut concentric layered lines.", precio: "" },
+      { imagen: "52.jpeg",   nombre: "PREMIUM TALL WHITE SHELVING UNIT WITH LOWER CABINET", descripcion: "A striking, custom-built tall floor-standing display and storage unit masterfully finished in a clean matte white lacquer.", precio: "" },
     ]
   },
   "Gabinet": {
@@ -732,23 +794,23 @@ const catalogData = {
     tag: "Seating · Design",
     description: "Clean-lined, handcrafted cabinets and cabinetry that marry form with exceptional function.",
     items: [
-      { imagen: "2da.png", nombre: "LUXURY CURVED CABINET", descripcion: "Elegant vintage-inspired display cabinet with a smooth curved silhouette.", precio: "" },
-      { imagen: "3.jpeg", nombre: "MINIMALIST SLEEK CABINET", descripcion: "Premium longline storage cabinet featuring a handleless, seamless design.", precio: "" },
-      { imagen: "6.jpeg", nombre: "PREMIUM BAR & DISPLAY CABINET", descripcion: "An exquisite custom bar cabinet solution featuring integrated warm LED backlighting, elegant glass-front vitrines, and custom crown moldings.", precio: "" },
-      { imagen: "7.jpeg", nombre: "MODERN SHAKER KITCHEN CABINETS", descripcion: "Premium modular kitchen cabinetry featuring a timeless white Shaker-style design.", precio: "" },
-      { imagen: "22.jpeg", nombre: "LUXURY CURVED CABINET", descripcion: "An elegant vintage-inspired display cabinet featuring a smooth, distinct curved silhouette.", precio: "" },
-      { imagen: "30.jpeg", nombre: "CUSTOM BUILT-IN CLOSET SHELVING", descripcion: "A premium custom-built interior shelving unit designed for seamless closet integration.", precio: "" },
-      { imagen: "32.jpeg", nombre: "MODERN ARCHED DISPLAY SHELF", descripcion: "A striking minimalist high shelf cabinet featuring a bold clean archway design.", precio: "" },
-      { imagen: "35.jpeg", nombre: "PREMIUM NATURAL WOOD CORNER VANITY", descripcion: "An exquisite space-saving corner vanity cabinet expertly handcrafted from premium natural wood.", precio: "" },
-      { imagen: "36.jpeg", nombre: "CUSTOM WALK-IN CLOSET SHELVING SYSTEM", descripcion: "A beautifully personalized built-in closet storage unit featuring a dual-tone pink and white finish.", precio: "" },
-      { imagen: "39.jpeg", nombre: "CUSTOM BUILT-IN WINDOW BENCH CABINET", descripcion: "A sophisticated, space-optimizing low-profile window bench custom-crafted for high-end residential interiors.", precio: "" },
-      { imagen: "40.jpeg", nombre: "CUSTOM BUILT-IN NATURAL WOOD WINDOW BENCH", descripcion: "A masterfully crafted low-profile window bench custom-integrated for high-end residential spaces.", precio: "" },
-      { imagen: "42.jpeg", nombre: "CUSTOM WOOD WINDOW BENCH CREDENZA", descripcion: "An elegant, low-profile bespoke window bench meticulously crafted from premium light-toned wood.", precio: "" },
-      { imagen: "43.jpeg", nombre: "PREMIUM L-SHAPED WALK-IN CLOSET SYSTEM", descripcion: "A masterfully designed custom L-shaped walk-in closet maximized for high-end residential storage.", precio: "" },
-      { imagen: "44.jpeg", nombre: "MODERN ANTHRACITE WALK-IN CLOSET SYSTEM", descripcion: "A premium, large-scale custom L-shaped walk-in closet system masterfully finished in a contemporary dark anthracite gray coating.", precio: "" },
-      { imagen: "45.jpeg", nombre: "MODERN ERGONOMIC CORNER CLOSET TOWER", descripcion: "A large-scale, high-capacity custom walk-in closet module tailored for seamless corner placement.", precio: "" },
-      { imagen: "46.jpeg", nombre: "PREMIUM NATURAL OAK MODULAR WARDROBE", descripcion: "A high-end modular reach-in closet assembly meticulously built from light natural oak wood.", precio: "" },
-      { imagen: "47.jpeg", nombre: "PREMIUM COBALT BLUE MODULAR KITCHEN CABINETRY", descripcion: "A striking, custom-engineered L-shaped residential kitchen cabinetry suite masterfully finished in a bold matte cobalt blue.", precio: "" },
+      { imagen: "2da.png",   nombre: "LUXURY CURVED CABINET", descripcion: "Elegant vintage-inspired display cabinet with a smooth curved silhouette.", precio: "" },
+      { imagen: "3.jpeg",    nombre: "MINIMALIST SLEEK CABINET", descripcion: "Premium longline storage cabinet featuring a handleless, seamless design.", precio: "" },
+      { imagen: "6.jpeg",    nombre: "PREMIUM BAR & DISPLAY CABINET", descripcion: "An exquisite custom bar cabinet solution featuring integrated warm LED backlighting, elegant glass-front vitrines, and custom crown moldings.", precio: "" },
+      { imagen: "7.jpeg",    nombre: "MODERN SHAKER KITCHEN CABINETS", descripcion: "Premium modular kitchen cabinetry featuring a timeless white Shaker-style design.", precio: "" },
+      { imagen: "22.jpeg",   nombre: "LUXURY CURVED CABINET", descripcion: "An elegant vintage-inspired display cabinet featuring a smooth, distinct curved silhouette.", precio: "" },
+      { imagen: "30.jpeg",   nombre: "CUSTOM BUILT-IN CLOSET SHELVING", descripcion: "A premium custom-built interior shelving unit designed for seamless closet integration.", precio: "" },
+      { imagen: "32.jpeg",   nombre: "MODERN ARCHED DISPLAY SHELF", descripcion: "A striking minimalist high shelf cabinet featuring a bold clean archway design.", precio: "" },
+      { imagen: "35.jpeg",   nombre: "PREMIUM NATURAL WOOD CORNER VANITY", descripcion: "An exquisite space-saving corner vanity cabinet expertly handcrafted from premium natural wood.", precio: "" },
+      { imagen: "36.jpeg",   nombre: "CUSTOM WALK-IN CLOSET SHELVING SYSTEM", descripcion: "A beautifully personalized built-in closet storage unit featuring a dual-tone pink and white finish.", precio: "" },
+      { imagen: "39.jpeg",   nombre: "CUSTOM BUILT-IN WINDOW BENCH CABINET", descripcion: "A sophisticated, space-optimizing low-profile window bench custom-crafted for high-end residential interiors.", precio: "" },
+      { imagen: "40.jpeg",   nombre: "CUSTOM BUILT-IN NATURAL WOOD WINDOW BENCH", descripcion: "A masterfully crafted low-profile window bench custom-integrated for high-end residential spaces.", precio: "" },
+      { imagen: "42.jpeg",   nombre: "CUSTOM WOOD WINDOW BENCH CREDENZA", descripcion: "An elegant, low-profile bespoke window bench meticulously crafted from premium light-toned wood.", precio: "" },
+      { imagen: "43.jpeg",   nombre: "PREMIUM L-SHAPED WALK-IN CLOSET SYSTEM", descripcion: "A masterfully designed custom L-shaped walk-in closet maximized for high-end residential storage.", precio: "" },
+      { imagen: "44.jpeg",   nombre: "MODERN ANTHRACITE WALK-IN CLOSET SYSTEM", descripcion: "A premium, large-scale custom L-shaped walk-in closet system masterfully finished in a contemporary dark anthracite gray coating.", precio: "" },
+      { imagen: "45.jpeg",   nombre: "MODERN ERGONOMIC CORNER CLOSET TOWER", descripcion: "A large-scale, high-capacity custom walk-in closet module tailored for seamless corner placement.", precio: "" },
+      { imagen: "46.jpeg",   nombre: "PREMIUM NATURAL OAK MODULAR WARDROBE", descripcion: "A high-end modular reach-in closet assembly meticulously built from light natural oak wood.", precio: "" },
+      { imagen: "47.jpeg",   nombre: "PREMIUM COBALT BLUE MODULAR KITCHEN CABINETRY", descripcion: "A striking, custom-engineered L-shaped residential kitchen cabinetry suite masterfully finished in a bold matte cobalt blue.", precio: "" },
     ]
   },
   "Cylindrical Pedestal": {
@@ -757,10 +819,10 @@ const catalogData = {
     tag: "Decoration · MDF",
     description: "Sculptural pedestals that elevate any object into a statement piece.",
     items: [
-      { imagen: "2da.png", nombre: "SLATTED CYLINDRICAL PEDESTAL", descripcion: "Modern cylindrical display pedestal featuring a stylish wooden slat design.", precio: "" },
-      { imagen: "9.jpeg", nombre: "NATURAL WOOD CYLINDRICAL PEDESTAL", descripcion: "Solid cylindrical display pedestal featuring a beautiful, clean natural wood grain.", precio: "" },
-      { imagen: "19.jpeg", nombre: "NATURAL WOOD CYLINDRICAL PEDESTAL SET", descripcion: "A premium set of three nesting cylindrical display pedestals of varying heights, beautifully crafted from natural wood.", precio: "" },
-      { imagen: "23.jpeg", nombre: "FLUTED CYLINDRICAL PEDESTAL SET", descripcion: "A spectacular nesting set of three cylindrical display pedestals crafted with a premium fluted texture.", precio: "" },
+      { imagen: "2da.png",   nombre: "SLATTED CYLINDRICAL PEDESTAL", descripcion: "Modern cylindrical display pedestal featuring a stylish wooden slat design.", precio: "" },
+      { imagen: "9.jpeg",    nombre: "NATURAL WOOD CYLINDRICAL PEDESTAL", descripcion: "Solid cylindrical display pedestal featuring a beautiful, clean natural wood grain.", precio: "" },
+      { imagen: "19.jpeg",   nombre: "NATURAL WOOD CYLINDRICAL PEDESTAL SET", descripcion: "A premium set of three nesting cylindrical display pedestals of varying heights.", precio: "" },
+      { imagen: "23.jpeg",   nombre: "FLUTED CYLINDRICAL PEDESTAL SET", descripcion: "A spectacular nesting set of three cylindrical display pedestals crafted with a premium fluted texture.", precio: "" },
     ]
   },
   "Round Table": {
@@ -769,11 +831,11 @@ const catalogData = {
     tag: "Furniture · Premium",
     description: "Solid wood round tables that invite conversation and craftsmanship.",
     items: [
-      { imagen: "9.jpeg", nombre: "SLATTED HOURGLASS ROUND PEDESTAL", descripcion: "Architectural round pedestal featuring a unique hourglass silhouette made of vertical wooden slats.", precio: "" },
-      { imagen: "24.jpeg", nombre: "SLATTED HOURGLASS ROUND PEDESTAL", descripcion: "An architectural round pedestal featuring an elegant hourglass silhouette made of precision-spaced vertical wooden slats.", precio: "" },
-      { imagen: "28.jpeg", nombre: "SLATTED HOURGLASS ROUND PEDESTAL SET", descripcion: "A stunning nesting set of three geometric round pedestals featuring a distinct hourglass silhouette.", precio: "" },
-      { imagen: "51 2.jpeg", nombre: "LUXURY SUNBURST VENEERED ROUND EXECUTIVE CONFERENCE TABLE", descripcion: "A magnificent, large-scale round executive conference or dining table featuring an extraordinary sunburst radial veneer pattern.", precio: "" },
-      { imagen: "54 3.jpeg", nombre: "PREMIUM WHITE FLUTED HOURGLASS PEDESTAL TABLE", descripcion: "A striking architectural accent table or display pedestal masterfully finished in a clean matte white lacquer.", precio: "" },
+      { imagen: "9.jpeg",       nombre: "SLATTED HOURGLASS ROUND PEDESTAL", descripcion: "Architectural round pedestal featuring a unique hourglass silhouette made of vertical wooden slats.", precio: "" },
+      { imagen: "24.jpeg",      nombre: "SLATTED HOURGLASS ROUND PEDESTAL", descripcion: "An architectural round pedestal featuring an elegant hourglass silhouette.", precio: "" },
+      { imagen: "28.jpeg",      nombre: "SLATTED HOURGLASS ROUND PEDESTAL SET", descripcion: "A stunning nesting set of three geometric round pedestals featuring a distinct hourglass silhouette.", precio: "" },
+      { imagen: "51 2.jpeg",    nombre: "LUXURY SUNBURST VENEERED ROUND EXECUTIVE CONFERENCE TABLE", descripcion: "A magnificent, large-scale round executive conference or dining table featuring an extraordinary sunburst radial veneer pattern.", precio: "" },
+      { imagen: "54 3.jpeg",    nombre: "PREMIUM WHITE FLUTED HOURGLASS PEDESTAL TABLE", descripcion: "A striking architectural accent table or display pedestal masterfully finished in a clean matte white lacquer.", precio: "" },
     ]
   },
   "Side Table + Stool": {
@@ -782,10 +844,10 @@ const catalogData = {
     tag: "Decorative Set",
     description: "Matching auxiliary table and decorative stool sets in premium wood.",
     items: [
-      { imagen: "2da.png", nombre: "ARCHED SIDE TABLE", descripcion: "Minimalist side table featuring clean, modern arched leg details.", precio: "" },
-      { imagen: "9.jpeg", nombre: "GEOMETRIC MINI STOOL", descripcion: "Exquisitely crafted decorative mini stool or riser with abstract curved leg details.", precio: "" },
-      { imagen: "48.jpeg", nombre: "PREMIUM L-SHAPED EXECUTIVE RECEPTION DESK", descripcion: "A professional, large-scale L-shaped modular reception workstation.", precio: "" },
-      { imagen: "49.jpeg", nombre: "MINIMALIST TWO-TONE COMMERCIAL RECEPTION DESK", descripcion: "A sleek, contemporary reception counter designed for modern commercial spaces and upscale storefronts.", precio: "" },
+      { imagen: "2da.png",   nombre: "ARCHED SIDE TABLE", descripcion: "Minimalist side table featuring clean, modern arched leg details.", precio: "" },
+      { imagen: "9.jpeg",    nombre: "GEOMETRIC MINI STOOL", descripcion: "Exquisitely crafted decorative mini stool or riser with abstract curved leg details.", precio: "" },
+      { imagen: "48.jpeg",   nombre: "PREMIUM L-SHAPED EXECUTIVE RECEPTION DESK", descripcion: "A professional, large-scale L-shaped modular reception workstation.", precio: "" },
+      { imagen: "49.jpeg",   nombre: "MINIMALIST TWO-TONE COMMERCIAL RECEPTION DESK", descripcion: "A sleek, contemporary reception counter designed for modern commercial spaces.", precio: "" },
       { imagen: "54 2.jpeg", nombre: "ARCHITECTURAL SEMICIRCULAR TIERED DISPLAY STAGE", descripcion: "A unique, custom-engineered semicircular tiered display structure finished in a flawless matte white coat.", precio: "" },
     ]
   },
@@ -795,10 +857,10 @@ const catalogData = {
     tag: "Children's Decoration",
     description: "Safe, hand-finished wooden blocks designed to delight and inspire.",
     items: [
-      { imagen: "2da.png", nombre: "BABY DECORATIVE BLOCKS", descripcion: "Set of 4 stackable wooden alphabet cubes spelling Baby.", precio: "" },
-      { imagen: "5.jpeg", nombre: "BABY DECORATIVE BLOCKS", descripcion: "Premium set of 4 freestanding alphabet wooden cubes spelling BABY.", precio: "" },
-      { imagen: "9.jpeg", nombre: "BABY DECORATIVE BLOCKS — MODEL C", descripcion: "Stackable MDF alphabet cubes spelling 'BABY' with elegant raised relief details.", precio: "" },
-      { imagen: "29.jpeg", nombre: "BABY DECORATIVE BLOCKS SET", descripcion: "A grand display featuring multiple sets of precision-crafted MDF alphabet cubes spelling 'BABY'.", precio: "" },
+      { imagen: "2da.png",   nombre: "BABY DECORATIVE BLOCKS", descripcion: "Set of 4 stackable wooden alphabet cubes spelling Baby.", precio: "" },
+      { imagen: "5.jpeg",    nombre: "BABY DECORATIVE BLOCKS", descripcion: "Premium set of 4 freestanding alphabet wooden cubes spelling BABY.", precio: "" },
+      { imagen: "9.jpeg",    nombre: "BABY DECORATIVE BLOCKS — MODEL C", descripcion: "Stackable MDF alphabet cubes spelling 'BABY' with elegant raised relief details.", precio: "" },
+      { imagen: "29.jpeg",   nombre: "BABY DECORATIVE BLOCKS SET", descripcion: "A grand display featuring multiple sets of precision-crafted MDF alphabet cubes.", precio: "" },
     ]
   },
   "Decorative Arched Panel": {
@@ -807,12 +869,12 @@ const catalogData = {
     tag: "Panel · Art",
     description: "Architectural wall panels with graceful arched forms, a signature piece.",
     items: [
-      { imagen: "1ra.jpeg", nombre: "DECORATIVE ARCHED PANEL", descripcion: "Elegant multi-layered concentric arch structure with a smooth premium finish.", precio: "" },
-      { imagen: "4.jpeg", nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Luxury freestanding arched display wall featuring premium integrated warm LED lighting.", precio: "" },
-      { imagen: "8.jpeg", nombre: "FLUTED ARCHED PANEL", descripcion: "Features an elegant, precision-crafted fluted texture with seamless concentric arch channels.", precio: "165" },
-      { imagen: "9.jpeg", nombre: "BUTTERFLY SILHOUETTE PANEL", descripcion: "Stunning precision-cut MDF panel featuring an intricate butterfly silhouette design.", precio: "" },
-      { imagen: "15.jpeg", nombre: "HALF ARCH BACKGROUND PANELS", descripcion: "A modern set of two nesting half-arch backdrop panels crafted from premium MDF.", precio: "" },
-      { imagen: "17.jpeg", nombre: "MULTI-LAYERED LIGHT UP ARCHED PANEL WITH PEDESTAL", descripcion: "An architectural masterpiece featuring a precision-routed concentric arch panel integrated with warm ambient LED backlighting.", precio: "" },
+      { imagen: "1ra.jpeg",  nombre: "DECORATIVE ARCHED PANEL", descripcion: "Elegant multi-layered concentric arch structure with a smooth premium finish.", precio: "" },
+      { imagen: "4.jpeg",    nombre: "ARCHED DISPLAY HIGH SHELF", descripcion: "Luxury freestanding arched display wall featuring premium integrated warm LED lighting.", precio: "" },
+      { imagen: "8.jpeg",    nombre: "FLUTED ARCHED PANEL", descripcion: "Features an elegant, precision-crafted fluted texture with seamless concentric arch channels.", precio: "165" },
+      { imagen: "9.jpeg",    nombre: "BUTTERFLY SILHOUETTE PANEL", descripcion: "Stunning precision-cut MDF panel featuring an intricate butterfly silhouette design.", precio: "" },
+      { imagen: "15.jpeg",   nombre: "HALF ARCH BACKGROUND PANELS", descripcion: "A modern set of two nesting half-arch backdrop panels crafted from premium MDF.", precio: "" },
+      { imagen: "17.jpeg",   nombre: "MULTI-LAYERED LIGHT UP ARCHED PANEL WITH PEDESTAL", descripcion: "An architectural masterpiece featuring a precision-routed concentric arch panel integrated with warm ambient LED backlighting.", precio: "" },
     ]
   },
   "Decorative MDF Cube": {
@@ -821,16 +883,17 @@ const catalogData = {
     tag: "Decoration · MDF Premium",
     description: "Versatile decorative cubes that serve as display stands, seats, or art.",
     items: [
-      { imagen: "9.jpeg", nombre: "PREMIUM CUBIC DISPLAY PEDESTAL — MODEL A", descripcion: "Seamless and sturdy MDF cubic display block. Clean-cut and perfectly smooth, designed as a versatile pedestal for modern product showcases.", precio: "" },
+      { imagen: "9.jpeg",    nombre: "PREMIUM CUBIC DISPLAY PEDESTAL — MODEL A", descripcion: "Seamless and sturdy MDF cubic display block. Clean-cut and perfectly smooth, designed as a versatile pedestal for modern product showcases.", precio: "" },
     ]
   }
 };
 
 const WA_NUMBER = "3476625342";
 
+/* ── RENDER CATALOG GRID ── */
 function renderCatalogGrid() {
   const grid   = document.getElementById('catalog-grid');
-  const select = document.getElementById('contact-product-select');
+  const select = document.getElementById('f-product');
   const entries = Object.entries(catalogData);
   grid.innerHTML = '';
   entries.forEach(([name, data], index) => {
@@ -863,6 +926,7 @@ function renderCatalogGrid() {
   observeReveals();
 }
 
+/* ── DETAIL PANEL ── */
 function openDetail(categoryName) {
   const data = catalogData[categoryName];
   if (!data) return;
@@ -918,6 +982,7 @@ function placeholderHTML(icon) {
   return `<div class="product-card-placeholder"><span class="ph-icon">${icon}</span><span class="ph-label">Image not found</span></div>`;
 }
 
+/* ── LIGHTBOX ── */
 function openLightbox(src, alt) {
   const lb = document.getElementById('lightbox');
   document.getElementById('lightbox-img').src = src;
@@ -932,7 +997,7 @@ function closeLightbox() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); closeDetail(); } });
 
-/* Custom cursor */
+/* ── CUSTOM CURSOR ── */
 const cursorEl = document.getElementById('cursor');
 const ringEl   = document.getElementById('cursorRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -945,7 +1010,6 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
 })();
 document.addEventListener('mouseover', e => {
   const isHoverable = e.target.closest('a, button, .catalog-item, .service-card, .product-card, [role="button"]');
-  /* Don't override cursor on form fields */
   const isFormField = e.target.closest('input, select, textarea');
   if (isHoverable && !isFormField) {
     cursorEl.classList.add('hover'); ringEl.classList.add('hover');
@@ -954,9 +1018,11 @@ document.addEventListener('mouseover', e => {
   }
 });
 
+/* ── NAV SCROLL ── */
 const navEl = document.getElementById('nav');
 window.addEventListener('scroll', () => { navEl.classList.toggle('scrolled', window.scrollY > 80); });
 
+/* ── PARTICLES ── */
 const particlesEl = document.getElementById('particles');
 for (let i = 0; i < 18; i++) {
   const p = document.createElement('div');
@@ -966,6 +1032,7 @@ for (let i = 0; i < 18; i++) {
   particlesEl.appendChild(p);
 }
 
+/* ── INTERSECTION OBSERVER ── */
 function observeReveals() {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -993,12 +1060,149 @@ function countUp(el) {
   }, 20);
 }
 
-function handleSubmit() {
+/* ── TOAST NOTIFICATION ── */
+function showNotif(success, title, msg) {
   const notif = document.getElementById('notif');
+  const icon  = document.getElementById('notif-icon');
+  const t     = document.getElementById('notif-title');
+  const m     = document.getElementById('notif-msg');
+  notif.classList.remove('notif-error');
+  if (!success) notif.classList.add('notif-error');
+  icon.textContent = success ? '✦' : '✕';
+  t.textContent = title;
+  m.textContent = msg;
   notif.classList.add('show');
-  setTimeout(() => notif.classList.remove('show'), 4000);
+  setTimeout(() => notif.classList.remove('show'), 5000);
 }
 
+/* ── FORM VALIDATION ── */
+function validateForm() {
+  let valid = true;
+  const fields = [
+    { id: 'f-name',    label: 'name' },
+    { id: 'f-email',   label: 'email' },
+    { id: 'f-message', label: 'message' },
+  ];
+  // Clear previous errors
+  document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => {
+    el.classList.remove('error');
+  });
+  document.querySelectorAll('.field-error').forEach(el => el.remove());
+
+  fields.forEach(({ id, label }) => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.classList.add('error');
+      const err = document.createElement('span');
+      err.className = 'field-error';
+      err.textContent = `Please enter your ${label}.`;
+      el.parentNode.appendChild(err);
+      valid = false;
+    }
+  });
+
+  // Basic email check
+  const emailEl = document.getElementById('f-email');
+  if (emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+    emailEl.classList.add('error');
+    const existing = emailEl.parentNode.querySelector('.field-error');
+    if (!existing) {
+      const err = document.createElement('span');
+      err.className = 'field-error';
+      err.textContent = 'Please enter a valid email address.';
+      emailEl.parentNode.appendChild(err);
+    }
+    valid = false;
+  }
+
+  return valid;
+}
+
+/* ── MAIN SUBMIT HANDLER ── */
+async function handleSubmit() {
+  if (!validateForm()) return;
+
+  const btn   = document.getElementById('btn-submit');
+  const label = document.getElementById('btn-submit-label');
+
+  // Loading state
+  btn.disabled = true;
+  label.innerHTML = '<span class="btn-spinner"></span>Sending...';
+
+  const name    = document.getElementById('f-name').value.trim();
+  const phone   = document.getElementById('f-phone').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const product = document.getElementById('f-product').value;
+  const message = document.getElementById('f-message').value.trim();
+  const now     = new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' });
+
+  // ── If EmailJS is configured, send via API ──
+  if (EMAILJS_PUBLIC_KEY !== "QkGHnW2ccMrPWUhU1" &&
+      EMAILJS_SERVICE_ID !== "service_lnckjhe" &&
+      EMAILJS_TEMPLATE_ID !== "template_mshug97") {
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        to_email:   DEST_EMAIL,
+        from_name:  name,
+        from_email: email,
+        phone:      phone || 'Not provided',
+        product:    product || 'Not specified',
+        message:    message,
+        sent_date:  now,
+      });
+
+      showNotif(true, '✦ Message Sent', 'Thank you! We\'ll contact you very soon with your personalized quote.');
+      resetForm();
+
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      // Fallback to mailto if EmailJS fails
+      sendViaMailto(name, phone, email, product, message, now);
+    }
+
+  } else {
+    // ── Fallback: open the user's default mail client ──
+    sendViaMailto(name, phone, email, product, message, now);
+  }
+
+  // Restore button
+  btn.disabled = false;
+  label.innerHTML = '✦ Submit Request';
+}
+
+/* ── MAILTO FALLBACK ── */
+function sendViaMailto(name, phone, email, product, message, date) {
+  const subject = encodeURIComponent(`New Quote Request — M&M Creation Luxury`);
+  const body = encodeURIComponent(
+`New quote request from the website
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name:     ${name}
+Email:    ${email}
+Phone:    ${phone || 'Not provided'}
+Product:  ${product || 'Not specified'}
+Date:     ${date}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Project Description:
+${message}
+`);
+  window.open(`mailto:${DEST_EMAIL}?subject=${subject}&body=${body}`, '_blank');
+  showNotif(true, '✦ Almost done!', 'Your email client has opened. Just press "Send" to complete your request.');
+  resetForm();
+}
+
+function resetForm() {
+  ['f-name','f-phone','f-email','f-message'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-product').value = '';
+  document.querySelectorAll('.field-error').forEach(el => el.remove());
+  document.querySelectorAll('.form-input.error, .form-select.error, .form-textarea.error')
+    .forEach(el => el.classList.remove('error'));
+}
+
+/* ── INIT ── */
 renderCatalogGrid();
 </script>
 </body>
