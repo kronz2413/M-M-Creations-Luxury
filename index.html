@@ -765,11 +765,7 @@ const DEST_EMAIL = "mmcreationluxuryforniture@outlook.com";
 /* ══════════════════════════════════════════════════════════════ */
 
 // Init EmailJS
-(function() {
-  if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
-  }
-})();
+    emailjs.init("QkGHnW2ccMrPWUhU1");
 
 /* ── CATALOG DATA ── */
 const catalogData = {
@@ -1137,9 +1133,13 @@ async function handleSubmit() {
   const now     = new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' });
 
   // ── If EmailJS is configured, send via API ──
-  if (EMAILJS_PUBLIC_KEY !== "QkGHnW2ccMrPWUhU1" &&
-      EMAILJS_SERVICE_ID !== "service_lnckjhe" &&
-      EMAILJS_TEMPLATE_ID !== "template_mshug97") {
+  const EMAILJS_PUBLIC_KEY  = "QkGHnW2ccMrPWUhU1";  
+  const EMAILJS_SERVICE_ID  = "service_lnckjhe";      
+  const EMAILJS_TEMPLATE_ID = "template_mshug97";     
+
+if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY" &&     
+    EMAILJS_SERVICE_ID !== "YOUR_SERVICE_ID" &&
+    EMAILJS_TEMPLATE_ID !== "YOUR_TEMPLATE_ID") {
 
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
